@@ -1,103 +1,88 @@
-import Image from "next/image";
+"use client";
+import React, { useEffect, useState } from "react";
+import EventComponent from "@/components/mission/event/EventComponent";
+import { eventsData } from "@/components/mission/event/EventData";
+import MissionPage from "@/components/mission/Misson";
+import LandingPage from "@/components/mission/intro/Intro";
+import MusicToggleButton from "@/components/mission/button/MusicToggleButton";
 
 export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const [currentPage, setCurrentPage] = useState<"landing" | "mission" | "event">(
+    "landing"
+  );
+  const [selectedEventId, setSelectedEventId] = useState<string | null>(null);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  // Chỉ hiện header khi đang ở TOP của trang
+  const [isAtTop, setIsAtTop] = useState(true);
+  useEffect(() => {
+    const onScroll = () => {
+      // dùng ngưỡng nhỏ để tránh nhấp nháy do subpixel
+      setIsAtTop(window.scrollY <= 1);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll(); // thiết lập ban đầu
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const handleNavigateToMission = () => setCurrentPage("mission");
+  const handleNavigateToEvent = (id: string) => {
+    setSelectedEventId(id);
+    setCurrentPage("event");
+  };
+  const handleBackToMission = () => {
+    setSelectedEventId(null);
+    setCurrentPage("mission");
+  };
+
+  const selectedEvent = eventsData.find((e) => e.id === selectedEventId);
+
+  const Header: React.FC = () => (
+    <div className="fixed top-0 left-0 right-0 z-40">
+      <div className="mx-auto max-w-7xl flex items-center justify-between px-4 sm:px-6 lg:px-8 py-3">
+        {/* Logo */}
+        <div className="flex items-center gap-2">
+          <img
+            src="/co1.jpg"
+            alt="Website Logo"
+            className="h-8 w-auto"
+            onError={(e) => {
+              const target = e.target as HTMLImageElement;
+              target.style.display = "none";
+              const span = document.createElement("span");
+              span.textContent = "GROUP 2";
+              span.className = "text-amber-300 tracking-widest font-semibold";
+              target.parentElement?.appendChild(span);
+            }}
+          />
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+        <MusicToggleButton placement="header" />
+      </div>
+      <div className="h-px w-full bg-white/10" />
+    </div>
+  );
+
+  const renderPage = () => {
+    switch (currentPage) {
+      case "mission":
+        return <MissionPage onNavigateToEvent={handleNavigateToEvent} />;
+      case "event":
+        if (selectedEvent) {
+          return (
+            <EventComponent event={selectedEvent} onBack={handleBackToMission} />
+          );
+        }
+        setCurrentPage("mission");
+        return <MissionPage onNavigateToEvent={handleNavigateToEvent} />;
+      case "landing":
+      default:
+        return <LandingPage onNavigate={handleNavigateToMission} />;
+    }
+  };
+
+  return (
+    <div>
+      {currentPage !== "landing" && isAtTop && <Header />}
+      {renderPage()}
     </div>
   );
 }
