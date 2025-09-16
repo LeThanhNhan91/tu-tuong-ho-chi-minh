@@ -9,7 +9,7 @@ const MEMBERS = [
     major: "Full-stack Developer",
     description: "Team leader với tầm nhìn chiến lược, chuyên xây dựng kiến trúc hệ thống và quản lý dự án. Đam mê tạo ra những sản phẩm có tác động tích cực.",
     img: "/podcast/my.jpg",
-    skills: ["Full-stack", "React", "C#"]
+    skills: ["Full-stack","Frontend", "React", "C#"]
   },
   { 
     name: "Trần Thành Đạt", 
@@ -17,7 +17,7 @@ const MEMBERS = [
     major: "Full-stack Developer",
     description: "Chuyên gia về hiệu suất và tối ưu hóa, luôn tìm cách cải thiện tốc độ và trải nghiệm người dùng trong mỗi dự án.",
     img: "/podcast/dat.jpg",
-    skills: ["Full-stack", "React", "C#"]
+    skills: ["Full-stack","Frontend", "React", "C#"]
   },
   { 
     name: "Lê Thành Nhân", 
@@ -25,7 +25,7 @@ const MEMBERS = [
     major: "Full-stack Developer",
     description: "Sáng tạo trong việc thiết kế giao diện người dùng, kết hợp nghệ thuật và công nghệ để tạo ra những trải nghiệm độc đáo.",
     img: "/podcast/nhan.jpg",
-    skills: ["Full-stack", "React", "C#"]
+    skills: ["Full-stack","Frontend", "React", "C#"]
   },
   { 
     name: "Nguyễn Hà Linh", 
@@ -33,7 +33,7 @@ const MEMBERS = [
     major: "Full-stack Developer",
     description: "Chú trọng vào bảo mật và ổn định hệ thống, đảm bảo mọi ứng dụng đều an toàn và đáng tin cậy cho người dùng.",
     img: "/podcast/linh.jpg",
-    skills: ["Full-stack", "React", "C#"]
+    skills: ["Full-stack","Frontend", "React", "C#"]
   },
   { 
     name: "Trương Tấn Huy", 
@@ -41,7 +41,7 @@ const MEMBERS = [
     major: "Full-stack Developer",
     description: "Chuyên gia tích hợp và triển khai, giúp kết nối các hệ thống khác nhau và đưa sản phẩm từ ý tưởng thành hiện thực. Và kiểm tra bảo mật hệ thống.",
     img: "/podcast/huy.jpg",
-    skills: ["Full-stack", "React", "C#"]
+    skills: ["Full-stack", "Frontend", "React", "C#"]
   },
 ];
 
